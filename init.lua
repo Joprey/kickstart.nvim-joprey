@@ -94,6 +94,8 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
+vim.opt.winbar = ' '  -- Fügt eine leere winbar hinzu, um visuell eine zusätzliche Zeile oben zu schaffen
+
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
