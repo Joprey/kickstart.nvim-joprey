@@ -233,6 +233,23 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
+  { -- Füge den Catppuccin Plugin Block hier ein
+  "catppuccin/nvim",
+  name = "catppuccin",
+  priority = 1000,
+  config = function()
+    require("catppuccin").setup({
+      flavour = "mocha",
+      integrations = {
+        treesitter = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+      },
+    })
+    vim.cmd.colorscheme "catppuccin"
+  end,
+},
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
