@@ -7,8 +7,7 @@
 ========         .----------------------.   | === |          ========
 ========         |.-""""""""""""""""""-.|   |-----|          ========
 ========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
+========         ||   KICKSTART.NVIM   ||   |-----|          ======== ========         ||                    ||   | === |          ========
 ========         ||                    ||   |-----|          ========
 ========         ||:Tutor              ||   |:::::|          ========
 ========         |'-..................-'|   |____o|          ========
@@ -94,7 +93,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
-vim.opt.winbar = ' '  -- Fügt eine leere winbar hinzu, um visuell eine zusätzliche Zeile oben zu schaffen
+vim.opt.winbar = ' ' -- Fügt eine leere winbar hinzu, um visuell eine zusätzliche Zeile oben zu schaffen
 
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -161,6 +160,9 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+
+-- Open init.lua
+vim.api.nvim_set_keymap('n', '<Leader>ev', ':e ~/.config/nvim/init.lua<CR>', { noremap = true, silent = true })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -234,22 +236,36 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   { -- Füge den Catppuccin Plugin Block hier ein
-  "catppuccin/nvim",
-  name = "catppuccin",
-  priority = 1000,
-  config = function()
-    require("catppuccin").setup({
-      flavour = "mocha",
-      integrations = {
-        treesitter = true,
-        gitsigns = true,
-        nvimtree = true,
-        telescope = true,
-      },
-    })
-    vim.cmd.colorscheme "catppuccin"
-  end,
-},
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'mocha',
+        integrations = {
+          treesitter = true,
+          gitsigns = true,
+          nvimtree = true,
+          telescope = true,
+        },
+      }
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
+
+  -- Füge die Konfiguration für lualine hinzu
+  {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'catppuccin', -- Setzen Sie das Thema der Statusleiste auf Catppuccin
+        },
+      }
+    end,
+  },
+
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
